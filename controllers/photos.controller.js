@@ -14,7 +14,13 @@ exports.add = async (req, res) => {
       
       const fileExt = fileName.split('.').slice(-1)[0];
       
-      if (fileExt == 'jpg' || fileExt == 'gif' || fileExt == 'png') {
+      if (
+        fileExt == 'jpg' 
+        || fileExt == 'gif' 
+        || fileExt == 'png'
+        && title.length <= 25
+        && author.length <= 50  
+      ) {
           const newPhoto = new Photo({ title, author, email, src: fileName, votes: 0 });
           await newPhoto.save();
           res.json(newPhoto);
